@@ -1,12 +1,13 @@
 #################################################################################
-#	Richard To
-#	rto@alaska.edu
+#	
+#   Richard To
+#   rto@alaska.edu
 #   CS-241 Assignment 1, Program 1
 #   February 4, 2012
 #
-#	PURPOSE:		This program demonstrates various MIPS instructions.
+#   PURPOSE:        This program demonstrates various MIPS instructions.
 #
-#	ALGORITHM:		a = 2
+#   ALGORITHM:      a = 2
 #                   b = 55
 #                   c = 2353
 #                   d = 4
@@ -20,10 +21,10 @@
 #                   #Couldn't figure out a simple way to rotate bits in python
 #                   d = d << 12
 #
-#	INPUTS:		    The values of A_VAL, B_VAL, C_VAL, D_VAL will be integers 
+#   INPUTS:         The values of A_VAL, B_VAL, C_VAL, D_VAL will be integers 
 #                   which will have various computations performed on them.                   
 #
-#	OUTPUTS:		The value of "A_VAL" will be multipled by 6
+#   OUTPUTS:        The value of "A_VAL" will be multipled by 6
 #                   The value of "B_VAL" will be divided by 8
 #                   The value of "C_VAL" will be shifted to the right 10 bit places
 #                   The value of "D_VAL" will be rotated to the left 12 places

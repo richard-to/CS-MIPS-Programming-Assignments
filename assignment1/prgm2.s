@@ -1,13 +1,13 @@
 #################################################################################
 #
-#	Richard To
-#	rto@alaska.edu
+#   Richard To
+#   rto@alaska.edu
 #   CS-241 Assignment 1, Program 2
 #   February 5, 2012
 #
-#	PURPOSE:		Learn how to write selection statements in MIPS.
+#   PURPOSE:        Learn how to write selection statements in MIPS.
 #
-#	ALGORITHM:		score = 102
+#   ALGORITHM:      score = 102
 #                   grade = '?'
 #                   valid = 1
 #
@@ -25,9 +25,9 @@
 #                   else:
 #                       grade = 'F'        
 #
-#	INPUTS:		    SCORE is the score received
+#   INPUTS:         SCORE is the score received
 #
-#	OUTPUTS:		VALID returns the validity of the grade, meaning if the grade
+#   OUTPUTS:        VALID returns the validity of the grade, meaning if the grade
 #                   was not less than 0 or greater than 100
 #
 #                   GRADE returns the letter grade based on the score, or a

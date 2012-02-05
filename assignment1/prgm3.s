@@ -1,13 +1,13 @@
 #################################################################################
 #
-#	Richard To
-#	rto@alaska.edu
+#   Richard To
+#   rto@alaska.edu
 #   CS-241 Assignment 1, Program 3
 #   February 5, 2012
 #
-#	PURPOSE:		Learn how to write loops in MIPS
+#   PURPOSE:        Learn how to write loops in MIPS
 #
-#	ALGORITHM:		total = 0
+#   ALGORITHM:      total = 0
 #                   upper = 0
 #                   lower = 0
 #                   chars = 'aBwdfe$%2s.';
@@ -21,10 +21,10 @@
 #                       elif c >= 'a' and c <= 'z':
 #                           lower += 1
 #
-#	INPUTS:		CHARS is the characters that will be be run through the loop
+#   INPUTS:	    CHARS is the characters that will be be run through the loop
 #               and test for total characters, uppercase, and lowercase.
 #
-#	OUTPUTS:	TOTAL returns the total characters in string.
+#   OUTPUTS:    TOTAL returns the total characters in string.
 #               
 #               UPPER returns the total uppercase characters
 #
