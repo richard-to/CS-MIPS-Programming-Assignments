@@ -91,7 +91,7 @@ grade_d:
     
 grade_f:
     addi $t4, $zero, 70 # GRADE = 'F'
-    sw   $t4, GRADE
+    sw   $t4, GRADE 
     sw   $t2, VALID     # VALID = 1
     j    end
                     
