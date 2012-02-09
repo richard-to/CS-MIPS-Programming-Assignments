@@ -2,7 +2,7 @@
 #
 #   Richard To
 #   rto@alaska.edu
-#   CS-241 Assignment 1, Program 3
+#   CS-221 Assignment 1, Program 3
 #   February 5, 2012
 #
 #   PURPOSE:        Learn how to write loops in MIPS

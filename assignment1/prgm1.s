@@ -2,7 +2,7 @@
 #	
 #   Richard To
 #   rto@alaska.edu
-#   CS-241 Assignment 1, Program 1
+#   CS-221 Assignment 1, Program 1
 #   February 4, 2012
 #
 #   PURPOSE:        This program demonstrates various MIPS instructions.
