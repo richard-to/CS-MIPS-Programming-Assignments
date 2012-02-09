@@ -65,4 +65,5 @@ main:
     rol  $t1, $t0, 12    # Rotate the value of D 12 places
     sw   $t1, D_VAL      # Store the result back into D
        
-    jr  $ra             # Exit   
+    li   $v0, 10         # Syscall Exit
+    syscall  

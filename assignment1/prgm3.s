@@ -73,4 +73,5 @@ endloop:
     sw   $t0, TOTAL             # Store TOTAL
     sw   $t1, UPPER             # Store UPPER
     sw   $t2, LOWER             # Store LOWER 
-    jr   $ra                    # Exit
+    li   $v0, 10                # Syscall Exit
+    syscall

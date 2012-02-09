@@ -96,4 +96,5 @@ grade_f:
     j    end
                     
 end:       
-    jr  $ra             # Exit       
+    li   $v0, 10        # Syscall Exit
+    syscall      
