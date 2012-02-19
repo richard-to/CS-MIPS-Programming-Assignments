@@ -33,3 +33,16 @@
 #               J_TYPES: A count of all jtype instructions used.
 #
 #################################################################################
+
+        .data
+R_TYPES:  .word 0
+I_TYPES:  .word 0
+J_TYPES:  .word 0
+
+        .text
+main:
+    la    $t0, main                # file = open('prgm1.txt', 'r')
+    add   $t1, $zero, $zero        # R_TYPES = 0
+    add   $t2, $zero, $zero        # I_TYPES = 0
+    add   $t3, $zero, $zero        # J_TYPES = 0
+    jr    $ra                      # Exit
