@@ -41,8 +41,16 @@ J_TYPES:  .word 0
 
         .text
 main:
-    la    $t0, main                # file = open('prgm1.txt', 'r')
-    add   $t1, $zero, $zero        # R_TYPES = 0
-    add   $t2, $zero, $zero        # I_TYPES = 0
-    add   $t3, $zero, $zero        # J_TYPES = 0
-    jr    $ra                      # Exit
+    la    $t0, 0x00400000           # file = open('prgm1.txt', 'r')
+    add   $t1, $zero, $zero         # R_TYPES = 0
+    add   $t2, $zero, $zero         # I_TYPES = 0
+    add   $t3, $zero, $zero         # J_TYPES = 0
+                                    #         
+loop:                               # for line in file:
+    ld    $t4, 0($t0)               #
+    sll   $t5, $t4, 16              #
+    andi  $t6, $t5, 0xfc000         #
+    addi  $t0, $t0, 4               #
+    j     loop                      #
+                                    #
+    jr    $ra                       # Exit
