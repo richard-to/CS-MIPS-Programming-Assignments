@@ -20,7 +20,7 @@
 #                       iTypes += 1
 #                   else:
 #                       rTypes += 1    
-#                       if line.startswith('001000', 26):
+#                       if line.startswith('001000', 8):
 #                           break
 #            
 #               file.close()      
@@ -40,17 +40,44 @@ I_TYPES:  .word 0
 J_TYPES:  .word 0
 
         .text
-main:
-    la    $t0, 0x00400000           # file = open('prgm1.txt', 'r')
-    add   $t1, $zero, $zero         # R_TYPES = 0
-    add   $t2, $zero, $zero         # I_TYPES = 0
-    add   $t3, $zero, $zero         # J_TYPES = 0
+main:                               # 
+    la    $s0, 0x00400000           # file = open('prgm1.txt', 'r')
+                                    #
+    lui   $t1, 0xFC00               # OPCODE_MASK                                     
+    lui   $s1, 0x800                # J_OPCODE
+    lui   $s2, 0xC00                # JAL_OPCODE
+    addi  $s3, 8                    # JR_FUNCT
+                                    #                
+    add   $s4, $zero, $zero         # R_TYPES = 0
+    add   $s5, $zero, $zero         # I_TYPES = 0
+    add   $s6, $zero, $zero         # J_TYPES = 0
                                     #         
 loop:                               # for line in file:
-    ld    $t4, 0($t0)               #
-    sll   $t5, $t4, 16              #
-    andi  $t6, $t5, 0xfc000         #
-    addi  $t0, $t0, 4               #
+    lw    $t0, 0($s0)               #
+    and   $t2, $t0, $t1             #
+    beq   $t2, $s1, is_jtype        # if line.startswith('000010') or 
+    beq   $t2, $s2, is_jtype        # line.startswith('000011'):   
+    bne   $t2, $zero, is_itype      # elif line.startswith('000000') == False:
+is_rtype:                           #       
+    addi  $s4, $s4, 1               # R_TYPES += 1
+    andi  $t3, $t0, 0x3f            # 
+    beq   $t3, $s3, endloop         # if line.startswith('001000', 8):       
+    j     continue                  #
+                                    #
+is_jtype:                           #
+    addi  $s6, $s6, 1               # J_TYPES += 1
+    j     continue                  #
+                                    #
+is_itype:                           #
+    addi  $s5, $s5, 1               # I_TYPES += 1
+    j     continue                  #
+                                    #
+continue:                           #
+    addi  $s0, $s0, 4               #
     j     loop                      #
                                     #
+endloop:                            #
+    sw    $s4, R_TYPES              # Store R Types
+    sw    $s5, J_TYPES              # Store J Types
+    sw    $s6, I_TYPES              # Store I Types                                
     jr    $ra                       # Exit

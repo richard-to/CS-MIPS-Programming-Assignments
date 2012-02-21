@@ -10,7 +10,7 @@ for line in file:
         iTypes += 1
     else:
         rTypes += 1    
-        if line.startswith('001000', 26):
+        if line.startswith('001000', 8):
             break
             
 file.close()     
