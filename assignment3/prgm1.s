@@ -38,3 +38,24 @@
 #   OUTPUTS:    IS_PALINDROME: Whether the user entered value was a palindrome
 #
 #################################################################################
+
+                 .data
+INPUT_PROMPT:    .asciiz "Enter a string: "
+CONTINUE_PROMPT: .asciiz "Enter another string? (Y/n): "                
+CONTINUE:        .word 0
+IS_PALINDROME:   .word 0
+INPUT:           .word 0
+
+                 .text             # go_again = "Y"
+main:                              # while go_again == "Y":
+    la      $a0, INPUT_PROMPT      # palindrome = raw_input("Enter a string: ")
+    li      $v0, 4                 #
+    syscall                        #
+                                   #
+    la      $a0, INPUT             #
+    li      $v0, 8                 #
+    syscall                        #  
+                                   #
+    li      $v0, 10                #
+    syscall                        #
+    
