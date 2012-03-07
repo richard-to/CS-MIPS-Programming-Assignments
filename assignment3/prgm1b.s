@@ -28,7 +28,8 @@ main:
     addi    $sp, $sp, -4
     sw      $ra, 0($sp)
     jal     toUpperCase
-    lw      $ra, 0($sp)    
+    lw      $ra, 0($sp)
+    add     $s1, $v0, $zero    
     addi    $sp, $sp, 4
     li      $v0, 10
     syscall
