@@ -116,11 +116,11 @@ mainEnd:                                   #
     lb      $s4, 0($a0)                    #
     beq     $s4, $s5, main                 #        
     li      $v0, 10                        #
-    syscall                                #  Exit
+    syscall                                # Exit
                                            #
                                            #    
 stripNonAlpha:                             # def stripNonAlpha(str):
-    addi    $sp, $sp, -8                   #
+    addi    $sp, $sp, -8                   #     return re.sub(r'\W', '', str)
     sw      $ra, 0($sp)                    #
     sw      $a0, -4($sp)                   #
     add     $t0, $a0, $zero                #
@@ -131,7 +131,7 @@ stripNonAlpha:                             # def stripNonAlpha(str):
     addi    $t2, $zero, 10                 #
     addi    $t3, $zero, 1                  #
                                            #
-snaLoop:                                   # return re.sub(r'\W', '', str)
+snaLoop:                                   # 
     lb      $t4, 0($t0)                    #
     beq     $t4, $t2, snaEnd               #     
     slti    $t5, $t4, 48                   #
@@ -163,8 +163,8 @@ snaEnd:                                    #
     jr      $ra                            #
                                            #
                                            #
-toUpperCase:                               #
-    addi    $sp, $sp, -8                   #
+toUpperCase:                               # def toUpperCase(str):
+    addi    $sp, $sp, -8                   #    return str.upper()
     sw      $ra, 0($sp)                    #
     sw      $a0, -4($sp)                   #
     add     $t0, $a0, $zero                #
@@ -197,8 +197,8 @@ tucEnd:                                    #
     jr      $ra                            #
                                            #
                                            #
-isAPalindrome:                             #
-    addi    $sp, $sp, -4                   # 
+isAPalindrome:                             # def isAPalindrome(palindrome):
+    addi    $sp, $sp, -4                   #     return palindrome == palindrome[::-1]
     sw      $ra, 0($sp)                    #
     add     $t0, $a0, $zero                # 
     add     $t1, $t0, $zero                #
