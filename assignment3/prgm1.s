@@ -120,34 +120,34 @@ mainEnd:                                   #
                                            #
                                            #    
 stripNonAlpha:                             # def stripNonAlpha(str):
-    addi    $sp, $sp, -8                   #     return re.sub(r'\W', '', str)
+    addi    $sp, $sp, -8                   #     
     sw      $ra, 0($sp)                    #
     sw      $a0, -4($sp)                   #
-    add     $t0, $a0, $zero                #
+    add     $t0, $a0, $zero                # 
     li      $a0, 80                        #
     li      $v0, 9                         # 
     syscall                                #  
-    add     $t1, $v0, $zero                #
-    addi    $t2, $zero, 10                 #
-    addi    $t3, $zero, 1                  #
+    add     $t1, $v0, $zero                # strNonAlpha = ""
+    addi    $t2, $zero, 10                 # delim = "\n"
+    addi    $t3, $zero, 1                  # isTrue = 1
                                            #
-snaLoop:                                   # 
-    lb      $t4, 0($t0)                    #
-    beq     $t4, $t2, snaEnd               #     
-    slti    $t5, $t4, 48                   #
-    beq     $t5, $t3, snaIncr              #
-    slti    $t5, $t4, 58                   #
-    beq     $t5, $t3, snaAppend            #
-    slti    $t5, $t4, 65                   #
-    beq     $t5, $t3, snaIncr              #
-    slti    $t5, $t4, 91                   #
-    beq     $t5, $t3, snaAppend            #
-    slti    $t5, $t4, 97                   #
-    beq     $t5, $t3, snaIncr              #
-    slti    $t5, $t4, 123                  #
-    beq     $t5, $zero, snaIncr            #
-                                           #
-snaAppend:                                 #
+snaLoop:                                   # while (str[i] != delim):
+    lb      $t4, 0($t0)                    # 
+    beq     $t4, $t2, snaEnd               # if(str[i] < 48):    
+    slti    $t5, $t4, 48                   #     i += 1   
+    beq     $t5, $t3, snaIncr              # elif(str[i] < 58):
+    slti    $t5, $t4, 58                   #    strNonAlpha += str[i] 
+    beq     $t5, $t3, snaAppend            #    i += 1
+    slti    $t5, $t4, 65                   # elif(str[i] < 65):
+    beq     $t5, $t3, snaIncr              #    i += 1
+    slti    $t5, $t4, 91                   # elif(str[i] < 91):
+    beq     $t5, $t3, snaAppend            #    strNonAlpha += str[i]
+    slti    $t5, $t4, 97                   #    i += 1
+    beq     $t5, $t3, snaIncr              # elif(str[i] > 123):
+    slti    $t5, $t4, 123                  #    i += 1
+    beq     $t5, $zero, snaIncr            # else
+                                           #    strNonAlpha += str[i]
+snaAppend:                                 #    i += 1
     sb      $t4, 0($t1)                    #  
     addi    $t1, $t1, 1                    # 
                                            # 
@@ -160,33 +160,33 @@ snaEnd:                                    #
     lw      $a0, 4($sp)                    #
     lw      $ra, 0($sp)                    #
     addi    $sp, $sp, 4                    #
-    jr      $ra                            #
+    jr      $ra                            # return strNonAlpha
                                            #
                                            #
 toUpperCase:                               # def toUpperCase(str):
-    addi    $sp, $sp, -8                   #    return str.upper()
+    addi    $sp, $sp, -8                   #    
     sw      $ra, 0($sp)                    #
     sw      $a0, -4($sp)                   #
     add     $t0, $a0, $zero                #
     li      $a0, 80                        # 
     li      $v0, 9                         #  
     syscall                                #
-    add     $t1, $v0, $zero                # 
-    addi    $t2, $zero, 10                 #
-    addi    $t3, $zero, 1                  #
+    add     $t1, $v0, $zero                # strUpper = ""
+    addi    $t2, $zero, 10                 # delim = "\n"
+    addi    $t3, $zero, 1                  # isTrue = 1
                                            #
-tucLoop:                                   #
-    lb      $t4, 0($t0)                    #
+tucLoop:                                   # while(str[i] != delim):
+    lb      $t4, 0($t0)                    # 
     beq     $t4, $t2, tucEnd               # 
-    slti    $t5, $t4, 123                  #
-    beq     $t5, $zero, tucIncr            #
-    slti    $t5, $t4, 97                   #
-    beq     $t5, $t3, tucIncr              #  
-    addi    $t4, $t4, -32                  #
-tucIncr:                                   #
-    sb      $t4, 0($t1)                    # 
-    addi    $t1, $t1, 1                    #
-    addi    $t0, $t0, 1                    #
+    slti    $t5, $t4, 123                  # if(str[i] > 123):
+    beq     $t5, $zero, tucIncr            #    strUpper[i] += str[i]
+    slti    $t5, $t4, 97                   #    i += 1
+    beq     $t5, $t3, tucIncr              # elif(str[i] < 97): 
+    addi    $t4, $t4, -32                  #    strUpper[i] += str[i]
+tucIncr:                                   #    i += 1
+    sb      $t4, 0($t1)                    # else:
+    addi    $t1, $t1, 1                    #    strUpper[i] += str[i].upper()
+    addi    $t0, $t0, 1                    #    i += 1
     j       tucLoop                        #
                                            #
 tucEnd:                                    #
@@ -194,36 +194,36 @@ tucEnd:                                    #
     lw      $ra, 4($sp)                    #
     lw      $ra, 0($sp)                    # 
     addi    $sp, $sp, 8                    #
-    jr      $ra                            #
+    jr      $ra                            # return strUpper
                                            #
                                            #
 isAPalindrome:                             # def isAPalindrome(palindrome):
-    addi    $sp, $sp, -4                   #     return palindrome == palindrome[::-1]
+    addi    $sp, $sp, -4                   #     
     sw      $ra, 0($sp)                    #
     add     $t0, $a0, $zero                # 
     add     $t1, $t0, $zero                #
-    add     $t2, $zero, $zero              #
-    addi    $t3, $zero, 10                 #
+    add     $t2, $zero, $zero              # len = 0
+    addi    $t3, $zero, 10                 # delim = '\n'
                                            #
-iapLengthLoop:                             #
-    lb      $t4, 0($t1)                    #
-    beq     $t4, $t3, iapLengthLoopEnd     #
+iapLengthLoop:                             # while(str[i] != delim):
+    lb      $t4, 0($t1)                    #   len += 1
+    beq     $t4, $t3, iapLengthLoopEnd     #   i += 1
     addi    $t1, $t1, 1                    #  
     j       iapLengthLoop                  #
                                            #
-iapLengthLoopEnd:                          # 
+iapLengthLoopEnd:                          # len -= 1 
     addi    $t1, $t1, -1                   #
                                            # 
-iapCompare:                                #
-    lb      $t4, 0($t0)                    #
-    lb      $t5, 0($t1)                    # 
+iapCompare:                                # while(str[i] != delim):
+    lb      $t4, 0($t0)                    #    if(str[i] != str[len]):
+    lb      $t5, 0($t1)                    #        return false
     beq     $t4, $t3, iapPalindromeTrue    # 
-    bne     $t4, $t5, iapPalindromeFalse   #
+    bne     $t4, $t5, iapPalindromeFalse   # 
     addi    $t0, $t0, 1                    #  
     addi    $t1, $t1, -1                   #
     j       iapCompare                     #
                                            #
-iapPalindromeTrue:                         #
+iapPalindromeTrue:                         # return true
     addi    $v0, $zero, 1                  #
     j       iapEnd                         #
                                            #
