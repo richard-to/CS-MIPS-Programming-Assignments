@@ -60,4 +60,4 @@ tmoEnd:
     lw    $ra, 0($sp)
     addi  $sp, $sp, 4
     add   $v0, $zero, $t2
-    jr    $ra    
+    jr    $ra

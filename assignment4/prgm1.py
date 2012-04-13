@@ -83,5 +83,3 @@ def tooManyOperands(S):
         return True
     else:                                                              
         return False
-    
-print stackUnderflow('2 +')
