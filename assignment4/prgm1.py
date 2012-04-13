@@ -10,32 +10,27 @@ def putString(S):
 def badSyntax(S):
     
     length = len(S)
-    
+    prev = ' '
     for i in range(length):
-        if i == 0:
-            prev = ' '
-        else:
-            prev = S[i-1]
-        
-        if i+1 == length:
-            next = ' '
-        else:
-            next = S[i+1]
-        
+    
+        is_valid = False                
         curr = S[i]
-        if re.search('^[\d +-/*]$', curr) == None:
-            return True
+        
+        if(curr == ' '):
+            is_valid = True
+        elif(re.search('^[+-/*]$', curr) != None and prev == ' '):
+            is_valid = True
         elif(re.search('^[\d]$', curr) != None and 
-            (re.search('^[\d -]$', prev) == None or 
-            re.search('^[\d ]$', next) == None)):
-            return True                
-        elif(re.search('^[+/*]$', curr) != None and 
-            (prev != ' ' or next != ' ')):
+                (prev == '-' or prev == ' ' or re.search('^[\d]$', prev))):
+            is_valid = True
+        else:
+            is_valid = False
+            
+        if is_valid == False:
             return True
-        elif(curr == '-' and 
-            (prev != ' ' or re.search('^[\d ]$', next) == None)):
-            return True
-                                                  
+        
+        prev = curr
+                                                        
     return False
     
 def stackUnderflow(S):
@@ -43,30 +38,50 @@ def stackUnderflow(S):
     operators = 0
     
     length = len(S)
-    
+
     for i in range(length):
-        if i == 0:
-            prev = ' '
-        else:
-            prev = S[i-1]
+
+        curr = S[i]
         
         if i+1 == length:
             next = ' '
         else:
             next = S[i+1]
-        
-        curr = S[i]
-        if((prev == ' ' or prev == '-') and re.search('^[\d]$', curr) != None):
-            operands += 1
-        elif prev == ' ' and next == ' ' and re.search('^[+-/*]$', curr) != None:
-            operators += 1            
-        
-        if(operators >= operands):
-            return True
+      
+        if next == ' ':
+            if re.search('^[\d]$', curr) != None:
+                operands += 1
+            elif re.search('^[+-/*]$', curr) != None:
+                operators += 1            
+
+            if operators >= operands:
+                return True
                                                       
     return False
     
 def tooManyOperands(S):
-    return True
+    operands = 0
+    operators = 0
     
-print stackUnderflow('33 - 33 * 33 + 34')
+    length = len(S)
+    
+    for i in range(length):
+        curr = S[i]
+        
+        if i+1 == length:
+            next = ' '
+        else:
+            next = S[i+1]
+      
+        if next == ' ':
+            if re.search('^[\d]$', curr) != None:
+                operands += 1
+            elif re.search('^[+-/*]$', curr) != None:
+                operators += 1
+                
+    if operands - operators > 1:
+        return True
+    else:                                                              
+        return False
+    
+print tooManyOperands('33 -33 + 34 *')
