@@ -1,6 +1,5 @@
             .data
-EXPR:       .asciiz "33 33 + 34 *\n"
-
+EXPR:       .asciiz "-12 -54 * 78 as 360 343 - 20 /\n"
 
             .text
 main:
@@ -10,8 +9,7 @@ main:
     jal  badSyntax
     lw   $ra, 0($sp)
     addi $sp, $sp, 4
-    add  $s0, $zero, $v0
-    add  $s1, $v0, $zero
+    add  $s0, $v0, $zero
     li   $v0, 10
     syscall
     
@@ -40,7 +38,7 @@ bsLoop:
     addi  $t6, $zero, 1
     beq   $t7, $t6, bsFailEnd
     slti  $t7, $t3, 58
-    bne   $t7, $zero, bsFailEnd
+    beq   $t7, $zero, bsFailEnd
 bsIsDigit:
     addi  $t7, $zero, 32
     beq   $t2, $t7, bsIncr
@@ -50,7 +48,7 @@ bsIsDigit:
     addi  $t6, $zero, 1
     beq   $t7, $t6, bsFailEnd
     slti  $t7, $t2, 58
-    bne   $t7, $zero, bsFailEnd       
+    beq   $t7, $zero, bsFailEnd       
     j    bsIncr                 
 bsIsOperator:
     addi $t7, $zero, 32
