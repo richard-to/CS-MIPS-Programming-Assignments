@@ -3,24 +3,24 @@ EXPR:       .asciiz "-12 -54 * 78 as 360 343 - 20 /\n"
 
             .text
 main:
-    la   $a0, EXPR
-    addi $sp, $sp, -4
-    sw   $ra, 0($sp)
-    jal  badSyntax
-    lw   $ra, 0($sp)
-    addi $sp, $sp, 4
-    add  $s0, $v0, $zero
-    li   $v0, 10
+    la    $a0, EXPR
+    addi  $sp, $sp, -4
+    sw    $ra, 0($sp)
+    jal   badSyntax
+    lw    $ra, 0($sp)
+    addi  $sp, $sp, 4
+    add   $s0, $v0, $zero
+    li    $v0, 10
     syscall
     
 badSyntax:
-    addi $sp, $sp -8
-    sw   $ra, 0($sp)
-    sw   $a0, -4($sp)
-    add  $t0, $a0, $zero
-    addi $t1, $zero, 10
-    addi $t2, $zero, 32
-    addi $t4, $zero, 0
+    addi  $sp, $sp -8
+    sw    $ra, 0($sp)
+    sw    $a0, -4($sp)
+    add   $t0, $a0, $zero
+    addi  $t1, $zero, 10
+    addi  $t2, $zero, 32
+    addi  $t4, $zero, 0
 bsLoop:
     lb    $t3, 0($t0)
     beq   $t3, $t1, bsEnd
@@ -47,19 +47,19 @@ bsIsDigit:
     bne   $t7, $zero, bsFailEnd
     slti  $t7, $t2, 58
     beq   $t7, $zero, bsFailEnd       
-    j    bsIncr                 
+    j     bsIncr                 
 bsIsOperator:
-    addi $t7, $zero, 32
-    bne  $t2, $t7, bsFailEnd          
+    addi  $t7, $zero, 32
+    bne   $t2, $t7, bsFailEnd          
 bsIncr:
-    add  $t2, $t3, $zero    
-    addi $t0, $t0, 1
-    j bsLoop
+    add   $t2, $t3, $zero    
+    addi  $t0, $t0, 1
+    j     bsLoop
 bsFailEnd:
-    addi $t4, $zero, 1    
+    addi  $t4, $zero, 1    
 bsEnd:
-    lw   $a0, 4($sp)
-    lw   $ra, 0($sp)
-    addi $sp, $sp, 4
-    add  $v0, $zero, $t4
-    jr   $ra
+    lw    $a0, 4($sp)
+    lw    $ra, 0($sp)
+    addi  $sp, $sp, 4
+    add   $v0, $zero, $t4
+    jr    $ra
