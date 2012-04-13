@@ -35,8 +35,7 @@ bsLoop:
     addi  $t7, $zero, 47
     beq   $t3, $t7, bsIsOperator   
     slti  $t7, $t3, 48
-    addi  $t6, $zero, 1
-    beq   $t7, $t6, bsFailEnd
+    bne   $t7, $zero, bsFailEnd
     slti  $t7, $t3, 58
     beq   $t7, $zero, bsFailEnd
 bsIsDigit:
@@ -45,8 +44,7 @@ bsIsDigit:
     addi  $t7, $zero, 45
     beq   $t2, $t7, bsIncr
     slti  $t7, $t2, 48
-    addi  $t6, $zero, 1
-    beq   $t7, $t6, bsFailEnd
+    bne   $t7, $zero, bsFailEnd
     slti  $t7, $t2, 58
     beq   $t7, $zero, bsFailEnd       
     j    bsIncr                 

@@ -53,8 +53,8 @@ def stackUnderflow(S):
                 operands += 1
             elif re.search('^[+-/*]$', curr) != None:
                 operators += 1            
-
-            if operators >= operands:
+            print operators, ' ', operands 
+            if (operators > 0 or operands > 0) and operands <= operators:
                 return True
                                                       
     return False
@@ -84,4 +84,4 @@ def tooManyOperands(S):
     else:                                                              
         return False
     
-print tooManyOperands('33 -33 + 34 *')
+print stackUnderflow('2 +')
