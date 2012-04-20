@@ -27,6 +27,7 @@ def Pop(S):
     return S.pop()
     
 def getNumber(expr):
+    expr += ' '
     number = 0
     I = 0
     while(expr[I] != ' ' and expr[I] != None):
@@ -64,16 +65,29 @@ def applyOperator(operator):
     else:
         print "Stack underflow: no arguments"
 
-expr = '23 34 +'
+expr = '44 45 +'
 operand = ''
+sign = 1;
 
-for c in expr:
-    if re.search('[\d]', c) != None:
-        operand.join(c)
-    elif c == ' ' and operand != '':
-        Push(stack, getNumber(operand))
-        operand = ''
-    elif re.search('[-*+/]', c) != None:
-        applyOperator(c)
-        
+length = len(expr)
+    
+for i in range(length):
+    curr = expr[i]
+    
+    if i+1 == length:
+        next = ' '
+    else:
+        next = expr[i+1]
+  
+    if re.search('^[\d]$', curr) != None:
+        operand += str(curr)
+        if next == ' ':  
+            Push(stack, sign * getNumber(operand))
+            sign = 1
+            operand = ''           
+    elif curr == '-' and re.search('^[\d]$', next) != None:
+         sign = -1                    
+    elif re.search('^[+-/*]$', curr) != None:
+        applyOperator(curr)
+                
 print stack
