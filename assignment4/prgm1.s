@@ -104,7 +104,7 @@
 #       elif tooManyOperands(S):
 #            print "Too many operands"
 #       else
-#            putString(S)
+#            solveExpr(S)
 #       
 #       go_again = raw_input("Enter another string? (Y/n) ")
 ###############################################################################
