@@ -15,8 +15,8 @@ main:
     
 badSyntax:
     addi  $sp, $sp -8
-    sw    $ra, 0($sp)
-    sw    $a0, -4($sp)
+    sw    $ra, 4($sp)
+    sw    $a0, 0($sp)
     add   $t0, $a0, $zero
     addi  $t1, $zero, 10
     addi  $t2, $zero, 32
@@ -58,8 +58,8 @@ bsIncr:
 bsFailEnd:
     addi  $t4, $zero, 1    
 bsEnd:
-    lw    $a0, 4($sp)
-    lw    $ra, 0($sp)
-    addi  $sp, $sp, 4
+    lw    $a0, 0($sp)
+    lw    $ra, 4($sp)
+    addi  $sp, $sp, 8
     add   $v0, $zero, $t4
     jr    $ra

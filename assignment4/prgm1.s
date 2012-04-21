@@ -193,8 +193,8 @@ getString:                                  # def getString(S):
                                             #
 badSyntax:                                  # def badSyntax(S):
     addi  $sp, $sp -8                       #
-    sw    $ra, 0($sp)                       #
-    sw    $a0, -4($sp)                      #
+    sw    $ra, 4($sp)                       #
+    sw    $a0, 0($sp)                       #
     add   $t0, $a0, $zero                   # 
     addi  $t1, $zero, 10                    # newline = "\n"
     addi  $t2, $zero, 32                    # space = ' '
@@ -236,9 +236,9 @@ bsIncr:                                     #
 bsFailEnd:                                  #
     addi  $t4, $zero, 1                     # invalid = 1
 bsEnd:                                      #
-    lw    $a0, 4($sp)                       # 
-    lw    $ra, 0($sp)                       #
-    addi  $sp, $sp, 4                       # 
+    lw    $a0, 0($sp)                       # 
+    lw    $ra, 4($sp)                       #
+    addi  $sp, $sp, 8                       # 
     add   $v0, $zero, $t4                   #
     jr    $ra                               # return invalid
                                             #
@@ -246,8 +246,8 @@ bsEnd:                                      #
                                             #
 stackUnderflow:                             # def stackUnderflow(S):
     addi  $sp, $sp -8                       #
-    sw    $ra, 0($sp)                       #
-    sw    $a0, -4($sp)                      #
+    sw    $ra, 4($sp)                       #
+    sw    $a0, 0($sp)                       #
     add   $t0, $a0, $zero                   # 
     addi  $t1, $zero, 10                    # newline = "\n"
     add   $t2, $zero, $zero                 # invalid = 0
@@ -281,7 +281,7 @@ suIsOperator:                               #
 suCheckValid:                               #
     add   $t7, $t3, $t4                     #
     beq   $t7, $zero, suIncr                # if (operators > 0 or operands > 0) 
-    subu  $t7, $t3, $t4                     #
+    sub   $t7, $t3, $t4                     #
     blez  $t7, suFailEnd                    # and operands <= operators:
 suIncr:                                     #
     addi  $t0, $t0, 1                       #
@@ -289,9 +289,9 @@ suIncr:                                     #
 suFailEnd:                                  #    
     addi  $t2, $zero, 1                     # invalid = 1
 suEnd:                                      # 
-    lw    $a0, 4($sp)                       #    
-    lw    $ra, 0($sp)                       #
-    addi  $sp, $sp, 4                       #
+    lw    $a0, 0($sp)                       #    
+    lw    $ra, 4($sp)                       #
+    addi  $sp, $sp, 8                       #
     add   $v0, $zero, $t2                   #
     jr    $ra                               # return invalid  
                                             # 
@@ -299,8 +299,8 @@ suEnd:                                      #
                                             #
 tooManyOperands:                            # def tooManyOperands(S):
     addi  $sp, $sp -8                       #
-    sw    $ra, 0($sp)                       # 
-    sw    $a0, -4($sp)                      #  
+    sw    $ra, 4($sp)                       # 
+    sw    $a0, 0($sp)                       #  
     add   $t0, $a0, $zero                   #
     addi  $t1, $zero, 10                    #
     add   $t2, $zero, $zero                 #
@@ -335,13 +335,13 @@ tmoIncr:                                    #
     addi  $t0, $t0, 1                       #
     j     tmoLoop                           #
 tmoCheckValid:                              # 
-    subu  $t7, $t3, $t4                     # 
-    addiu $t7, $t7, -1                      #
+    sub   $t7, $t3, $t4                     # 
+    addi  $t7, $t7, -1                      #
     blez  $t7, tmoEnd                       # if operands - operators > 1:
     add   $t2, $zero, 1                     # invalid = 1
 tmoEnd:                                     #
-    lw    $a0, 4($sp)                       #
-    lw    $ra, 0($sp)                       #
-    addi  $sp, $sp, 4                       #   
+    lw    $a0, 0($sp)                       #
+    lw    $ra, 4($sp)                       #
+    addi  $sp, $sp, 8                       #   
     add   $v0, $zero, $t2                   # return invalid
     jr    $ra                               #
