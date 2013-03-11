@@ -1,1 +1,1 @@
-#MIPS Programming Assignments CS-221 (UAA)
+MIPS Programming Assignments
